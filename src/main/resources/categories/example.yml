@@ -1,0 +1,16 @@
+name: Example quiz
+authors:
+  - mfnalex
+questions:
+  - question: Who's the author of this weird quiz bot?
+    answers:
+      - mfnalex
+      - Alex
+  - question: What country is md_5 from?
+    answers:
+      - Australia
+  - question: What server software are we running?
+    answers:
+      - Paper
+      - PaperSpigot
+      - PaperMC

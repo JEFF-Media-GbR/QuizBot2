@@ -1,4 +1,4 @@
-package com.jeff_media.quizbot;
+package com.jeff_media.quizbot.utils;
 
 import org.yaml.snakeyaml.Yaml;
 

@@ -1,6 +1,6 @@
 package com.jeff_media.quizbot.config;
 
-import com.jeff_media.quizbot.YamlUtils;
+import com.jeff_media.quizbot.utils.YamlUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

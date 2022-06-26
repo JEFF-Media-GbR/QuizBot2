@@ -10,11 +10,11 @@ import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.Locale;
 
-public class QuizCommand implements CommandExecutor {
+public class StartCommand implements CommandExecutor {
 
     private final QuizBot bot;
 
-    public QuizCommand(QuizBot bot) {
+    public StartCommand(QuizBot bot) {
         this.bot = bot;
     }
 
@@ -24,24 +24,9 @@ public class QuizCommand implements CommandExecutor {
             return CommandResult.WRONG_USAGE;
         }
 
-        switch (args[0].toLowerCase(Locale.ROOT)) {
-            case "start" -> {
-                if(args.length < 2) {
-                    return CommandResult.WRONG_USAGE;
-                } else {
-                    return start(message, args[1]);
-                }
-            }
-            default -> {
-                return CommandResult.WRONG_USAGE;
-            }
-        }
-    }
-
-    public CommandResult start(Message message, String quizName) {
-
         TextChannel channel = message.getTextChannel();
         Member member = message.getMember();
+        String quizName = args[0].toLowerCase(Locale.ROOT);
 
         if(bot.getRunningGames().get(channel) != null) {
             message.reply("There's already a quiz running in this channel.").queue();
@@ -50,21 +35,20 @@ public class QuizCommand implements CommandExecutor {
 
         Game game;
         try {
-            game = new Game(quizName, channel, member);
+            game = Game.fromCategory(bot,quizName,channel,member);
         } catch (Game.CategoryNotFoundException e) {
-            message.reply("Unknown category \"" + quizName + "\". Enter \"" + bot.getCommandName("quiz list") + "\" for a list of available categories.").queue();
+            message.reply("Unknown category \"" + quizName + "\". Enter \"" + bot.getCommandName("list") + "\" for a list of available categories.").queue();
             return CommandResult.UNKNOWN_ERROR;
         }
 
         bot.getRunningGames().put(channel, game);
-
-        channel.sendMessage(member.getEffectiveName() + " started quiz " + quizName).queue();
+        game.start();
 
         return CommandResult.OKAY;
     }
 
     @Override
     public String usage() {
-        return "<command> start <category>";
+        return "start <category>";
     }
 }

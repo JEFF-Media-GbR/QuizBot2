@@ -46,14 +46,22 @@ public class MessageListener extends ListenerAdapter {
 
     private void handleCommand(Message message) {
         String[] args = message.getContentRaw().split(" ");
-        String command = args[0].substring(prefix.length()).toLowerCase(Locale.ROOT);
-        args = Arrays.copyOfRange(args, 1, args.length);
+        String command;// = args[0].substring(prefix.length()).toLowerCase(Locale.ROOT);
+        if(args.length == 1) {
+            command = "help";
+            args = new String[0];
+        } else {
+            command = args[1].toLowerCase(Locale.ROOT);
+            args = Arrays.copyOfRange(args, 2, args.length);
+        }
+
 
         System.out.println("Command: " + command + "\nArgs: " + Arrays.toString(args));
         bot.executeCommand(message, command, args);
     }
 
     private boolean isCommand(Message message) {
-        return message.getContentRaw().startsWith(prefix);
+        return message.getContentRaw().toLowerCase(Locale.ROOT).startsWith(prefix.toLowerCase(Locale.ROOT) + " ")
+                || message.getContentRaw().toLowerCase(Locale.ROOT).equals(prefix.toLowerCase(Locale.ROOT));
     }
 }
