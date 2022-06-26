@@ -1,0 +1,8 @@
+name: Example quiz
+authors:
+  - mfnalex
+questions:
+  - question: Who's the author of this weird quiz bot?
+    answers:
+      - mfnalex
+      - Alex
