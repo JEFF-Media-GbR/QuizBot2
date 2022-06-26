@@ -96,6 +96,7 @@ public class Game {
             List<String> authors =  List.of((String) config.get("AUTHOR"));
             List<Question> questions = new ArrayList<>();
             for(Map.Entry<String, Object> entry : config.entrySet()) {
+                if(entry.getKey().equalsIgnoreCase("AUTHOR")) continue;
                 questions.add(new Question(entry.getKey(), new Answer(entry.getValue())));
             }
             return new Game(bot,name,authors,questions,channel,starter);
