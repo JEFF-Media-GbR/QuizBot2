@@ -6,8 +6,10 @@ import com.jeff_media.quizbot.command.commands.HelpCommand;
 import com.jeff_media.quizbot.command.commands.ListCommand;
 import com.jeff_media.quizbot.command.commands.StartCommand;
 import com.jeff_media.quizbot.command.commands.StopCommand;
+import com.jeff_media.quizbot.config.Config;
 import com.jeff_media.quizbot.config.MainConfig;
 import com.jeff_media.quizbot.data.Game;
+import com.jeff_media.quizbot.utils.YamlUtils;
 import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -29,9 +31,11 @@ public class QuizBot {
     private final JDA jda;
     @Getter private final Map<TextChannel,Game> runningGames = new HashMap<>();
     @Getter private final Map<String, CommandExecutor> commandMap = new LinkedHashMap<>();
+    @Getter private final List<String> categories = new ArrayList<>();
     private final File categoriesFolder = new File("categories");
 
     public QuizBot() {
+        categoriesFolder.mkdirs();
         try {
             config = new MainConfig();
         } catch (FileNotFoundException exception) {
@@ -54,7 +58,22 @@ public class QuizBot {
         registerCommand(new ListCommand(this));
         registerCommand(new StartCommand(this));
         registerCommand(new StopCommand(this));
+        loadCategories();
         System.out.println("QuizBot is running.");
+    }
+
+    private void loadCategories() {
+        categories.clear();
+        for (File file : categoriesFolder.listFiles()) {
+            categories.add(file.getName().substring(0, file.getName().lastIndexOf(".")));
+        }
+        try {
+            Config defaultCategories = new Config("default-categories.yml");
+            categories.addAll(YamlUtils.getStringList(defaultCategories, "default-categories"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        categories.sort(String::compareToIgnoreCase);
     }
 
     private void registerCommand(CommandExecutor executor) {

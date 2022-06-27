@@ -11,7 +11,7 @@ public class Answer {
     @Getter private final List<String> correctAnswers;
 
     public Answer(Object answers) {
-        this.correctAnswers = new ArrayList<String>();
+        this.correctAnswers = new ArrayList<>();
         if(answers instanceof List list) {
             list.forEach(answer -> this.correctAnswers.add(String.valueOf(answer)));
         } else {

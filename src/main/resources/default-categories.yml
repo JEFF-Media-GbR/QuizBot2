@@ -1,0 +1,14 @@
+default-categories:
+# Custom
+  - minecraft-crafting-recipes
+  - spigot-api
+  - mfnalex-plugins
+# Stolen from Red
+  - 2015
+  - 2016
+  - computers
+  - general
+  - geography
+  - games
+  - uscapitals
+  - worldcapitals

@@ -36,6 +36,7 @@ public class Game {
     @Getter private CompletableFuture<Message> lastQuestionMessage;
     @Getter private ScheduledFuture<?> taskQuestionTimeOver;
     @Getter private ScheduledFuture<?> taskSendNextQuestion;
+    @Getter private int questionsWithoutAnyAnswers = 0;
     @Getter private Question currentQuestion;
 
     public Game(QuizBot bot, String name, List<String> authors, List<Question> questions, TextChannel channel, Member starter) {
@@ -128,7 +129,7 @@ public class Game {
 
                 taskQuestionTimeOver = executor.schedule(() -> {
                     try {
-                        //channel.sendMessage("Noone? The correct answer would have been: " + currentQuestion.getAnswer().getCorrectAnswerDisplay()).queue();
+                        questionsWithoutAnyAnswers++;
                         new MessageBuilder(channel)
                                 .description(AnswerUtils.getYoureAllNoobResponse(currentQuestion.getAnswer().getCorrectAnswerDisplay()))
                                 .replyTo(lastQuestionMessage)
@@ -136,8 +137,12 @@ public class Game {
                         taskQuestionTimeOver = null;
                         previousQuestions.put(currentQuestion, null);
                         currentQuestion = null;
-                        System.out.println("Noone had the correct answer.");
-                        nextQuestion();
+                        System.out.println("No one had the correct answer.");
+                        if(hasDied()) {
+                            die();
+                        } else {
+                            nextQuestion();
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -149,6 +154,14 @@ public class Game {
             //System.out.println("No questions left. The game is finished");
             endGameAndShowResults();
         }
+    }
+
+    private void die() {
+        System.out.println("Dying");
+        new MessageBuilder(channel)
+                .description(AnswerUtils.getEveryoneDiedResponse())
+                .send();
+        endGameAndShowResults();
     }
 
     private boolean isWinThresholdReached() {
@@ -194,13 +207,14 @@ public class Game {
         int questionNumber = previousQuestions.size() + 1;
         //channel.sendMessage("**Question #" + questionNumber + "**\n" + currentQuestion.getQuestion()).queue(message -> {lastQuestionMessage = message;}, error -> {lastQuestionMessage = null;});
         lastQuestionMessage = new MessageBuilder(channel)
-                .title("Question #" + questionNumber)
+                .title("\nQuestion #" + questionNumber)
                 .description(currentQuestion.getQuestion())
                 .send();
     }
 
     public void handleMessage(Message message) {
         if(currentQuestion == null) return;
+        questionsWithoutAnyAnswers = 0;
         addParticipant(message.getMember());
         if(currentQuestion.isCorrectAnswer(message)) {
             stats.computeIfAbsent(message.getMember(), GameStat::new).registerCorrectAnswer();
@@ -223,5 +237,11 @@ public class Game {
 
     private void addParticipant(Member member) {
         participants.add(member);
+    }
+
+    private boolean hasDied() {
+        int threshold = bot.getConfig().stopAfterQuestionsWithoutAnswers();
+        if(threshold <= 0) return false;
+        return questionsWithoutAnyAnswers >= threshold;
     }
 }

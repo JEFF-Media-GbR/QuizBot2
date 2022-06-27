@@ -17,7 +17,9 @@ questions:
       - "1.18"
   - question: "The Bukkit API (as of version 1.19) requires at least which version of Java?"
     answers:
+      - "Java 8"
       - "8"
+      - "Java 1.8"
       - "1.8"
   - question: "Classes belonging to the vanilla server code are commonly referred to as what?"
     answers:
@@ -59,7 +61,7 @@ questions:
       - "twelve"
   - question: "How many methods does the Listener interface declare?"
     answers:
-      - "None"
+      - "none"
       - "0"
       - "zero"
   - question: "Which event is called when a hopper tries to move items from one inventory to another?"

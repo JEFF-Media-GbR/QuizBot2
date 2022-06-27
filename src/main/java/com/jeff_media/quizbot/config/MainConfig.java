@@ -8,34 +8,34 @@ public class MainConfig extends Config {
     }
 
     public String botToken() {
-        return (String) map.get("bot-token");
+        return (String) map.getOrDefault("bot-token","YOUR_BOT_TOKEN");
     }
 
     public String prefix() {
-        return (String) map.get("prefix");
+        return (String) map.getOrDefault("prefix","?quiz");
     }
 
     public int timePerQuestion() {
-        return (int) map.get("time-per-question");
+        return (int) map.getOrDefault("time-per-question",20);
     }
 
     public int typingDurationPerQuestion() {
-        return (int) map.get("typing-duration-per-question");
+        return (int) map.getOrDefault("typing-duration-per-question",4);
     }
 
     public boolean everyoneCanStop() {
-        return (boolean) map.get("everyone-can-stop");
+        return (boolean) map.getOrDefault("everyone-can-stop", false);
     }
 
     public int winThreshold() {
-        return (int) map.get("win-threshold");
+        return (int) map.getOrDefault("win-threshold", 10);
     }
 
     public boolean distributeQuestionsEvenly() {
-        return (boolean) map.get("distribute-questions-evenly");
+        return (boolean) map.getOrDefault("distribute-questions-evenly", true);
     }
 
     public int stopAfterQuestionsWithoutAnswers() {
-        return (int) map.get("stop-after-questions-without-answers");
+        return (int) map.getOrDefault("stop-after-questions-without-answers", 10);
     }
 }

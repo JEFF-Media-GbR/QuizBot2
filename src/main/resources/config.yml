@@ -5,14 +5,14 @@ bot-token: "YOUR_BOT_TOKEN"
 prefix: "?quiz"
 
 # Time in seconds for each question
-time-per-question: 20
+time-per-question: 15
 
 # Time in seconds the bot needs to send a new question
-typing-duration-per-question: 4
+typing-duration-per-question: 3
 
 # Number of questions without any answers before the quiz automatically stops
 # Answers do not have to be correct to continue the quiz
-stop-after-questions-without-answer: 10
+stop-after-questions-without-answers: 10
 
 # When set to false, only the user who started a quiz can stop it.
 # When set to true, everyone can stop the quiz.
