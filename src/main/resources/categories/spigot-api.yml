@@ -5,7 +5,7 @@ questions:
   - question: "What's the lowest possible \"api-version\" in plugin.yml?"
     answers:
       - "1.13"
-  - question: "Custom Events require both, a static and a non-static method that the HandlerList. The static method is called \"getHandlerList\". What's the non-static method called?"
+  - question: "Custom Events require both, a static and a non-static method that return the HandlerList. The static method is called \"getHandlerList\". What's the non-static method called?"
     answers:
       - "getHandlers"
       - "getHandlers()"
