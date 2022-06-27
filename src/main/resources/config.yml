@@ -5,10 +5,10 @@ bot-token: "YOUR_BOT_TOKEN"
 prefix: "?quiz"
 
 # Time in seconds for each question
-time-per-question: 15
+time-per-question: 20
 
 # Time in seconds the bot needs to send a new question
-typing-duration-per-question: 4
+typing-duration-per-question: 2
 
 # When set to false, only the user who started a quiz can stop it.
 # When set to true, everyone can stop the quiz.
@@ -16,3 +16,7 @@ everyone-can-stop: false
 
 # The amount of correct answers needed to win the quiz
 win-threshold: 10
+
+# When true, the questions will be evenly distributed. This avoids getting the same question twice until all other
+# questions have been asked.
+distribute-questions-evenly: true

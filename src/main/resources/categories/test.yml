@@ -1,0 +1,24 @@
+name: Test
+authors: mfnalex
+win-threshold: 3
+questions:
+  - question: 1
+    answers: 1
+  - question: 2
+    answers: 2
+  - question: 3
+    answers: 3
+  - question: 4
+    answers: 4
+  - question: 5
+    answers: 5
+  - question: 6
+    answers: 6
+  - question: 7
+    answers: 7
+  - question: 8
+    answers: 8
+  - question: 9
+    answers: 9
+  - question: 10
+    answers: 10

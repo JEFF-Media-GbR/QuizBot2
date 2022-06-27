@@ -30,4 +30,8 @@ public class MainConfig extends Config {
     public int getWinThreshold() {
         return (int) map.get("win-threshold");
     }
+
+    public boolean distributeQuestionsEvenly() {
+        return (boolean) map.get("distribute-questions-evenly");
+    }
 }

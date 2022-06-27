@@ -1,0 +1,21 @@
+name: Spigot API
+authors:
+  - mfnalex
+questions:
+  - question: "What's the lowest possible \"api-version\" in plugin.yml?"
+    answers:
+      - "1.13"
+  - question: "Custom Events require both, a static and a non-static method that the HandlerList. The static method is called \"getHandlerList\". What's the non-static method called?"
+    answers:
+      - "getHandlers"
+      - "getHandlers()"
+  - question: "The second-last EventPriority is ..."
+    answers:
+      - "HIGHEST"
+  - question: "The Spigot .jar is a bootstrap .jar since which version?"
+    answers:
+      - "1.18"
+  - question: "The Bukkit API (as of version 1.19) requires at least which version of Java?"
+    answers:
+      - "8"
+      - "1.8"

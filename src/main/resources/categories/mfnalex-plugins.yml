@@ -1,0 +1,39 @@
+name: mfnalex' plugins
+authors:
+  - mfnalex
+questions:
+  - question: What's mfnalex' first publicly released plugin?
+    answers: &chestsort
+      - ChestSort
+      - Chest Sort
+  - question: What's mfnalex' most downloaded plugin?
+    answers: *chestsort
+  - question: What was mfnalex' first premium plugin?
+    answers: &angelchestplus
+      - AngelChest Plus
+      - AngelChestPlus
+      - Angel Chest Plus
+  - question: How many Spigot plugins (both free and paid) did mfnalex upload on SpigotMC?
+    answers:
+      - 18
+      - eighteen
+  - question: How many paid plugins did mfnalex upload on SpigotMC?
+    answers:
+      - 8
+      - eight
+  - question: What is mfnalex' newest public plugin?
+    answers:
+      - StackResize
+      - Stack Resize
+  - question: In what year was ChestSort released?
+    answers:
+      - 2018
+  - question: In what year was AngelChest Plus released?
+    answers:
+      - 2021
+  - question: In what year was BestTools released?
+    answers:
+      - 2020
+  - question: Since 2018, what's the only year in which mfnalex has not released any public plugin?
+    answers:
+      - 2019

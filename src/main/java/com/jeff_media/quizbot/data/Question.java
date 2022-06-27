@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.Message;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 public class Question extends MapSerializable {
 
@@ -27,6 +28,19 @@ public class Question extends MapSerializable {
     @Override
     public Map<String, Object> serialize() {
         return new MapSerializable.Builder().put("question",question).put("answers",answer.getCorrectAnswers()).serialize();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question1 = (Question) o;
+        return question.equals(question1.question);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(question);
     }
 
     /**

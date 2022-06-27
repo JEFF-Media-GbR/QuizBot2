@@ -2,6 +2,7 @@ package com.jeff_media.quizbot.data;
 
 import com.jeff_media.quizbot.QuizBot;
 import com.jeff_media.quizbot.utils.MessageBuilder;
+import com.jeff_media.quizbot.utils.WordUtils;
 import com.jeff_media.quizbot.utils.YamlUtils;
 import com.jeff_media.quizbot.config.Config;
 import lombok.Getter;
@@ -44,6 +45,9 @@ public class Game {
         this.starter = starter;
 
         Collections.shuffle(questions);
+        if(bot.getConfig().distributeQuestionsEvenly()) {
+            questions.sort(QuestionDistributionComparator.instance());
+        }
     }
 
     public void start() {
@@ -115,6 +119,7 @@ public class Game {
             channel.sendTyping().queue(success -> {channel.sendTyping().queue();});
             executor.schedule(() -> {
                 this.currentQuestion = questions.get(0);
+                QuestionDistributionComparator.raiseFrequency(currentQuestion);
                 System.out.println("Sending question " + currentQuestion.getQuestion());
                 questions.remove(0);
                 broadcastQuestion();
@@ -123,7 +128,7 @@ public class Game {
                     try {
                         //channel.sendMessage("Noone? The correct answer would have been: " + currentQuestion.getAnswer().getCorrectAnswerDisplay()).queue();
                         new MessageBuilder(channel)
-                                .description("Noone? The correct answer would have been: **" + currentQuestion.getAnswer().getCorrectAnswerDisplay() + "**")
+                                .description(WordUtils.getYoureAllNoobResponse(currentQuestion.getAnswer().getCorrectAnswerDisplay()))
                                 .replyTo(lastQuestionMessage)
                                 .send();
                         questionTimeOverTask = null;
@@ -190,7 +195,7 @@ public class Game {
                 questionTimeOverTask = null;
             }
             new MessageBuilder(channel)
-                    .description("Correct!")
+                    .description(WordUtils.getCorrectResponse())
                     .replyTo(message)
                     .send();
             System.out.println(message.getMember().getEffectiveName() + " correctly answered: " + message.getContentRaw());

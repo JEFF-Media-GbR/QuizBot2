@@ -1,0 +1,287 @@
+name: Minecraft Crafting Recipes
+authors:
+  - mfnalex
+questions:
+  - question: "A spyglass can be crafted with two copper ingots and ..."
+    answers:
+      - "Amethyst Shard"
+  - question: "A hay bale consists of how many wheat?"
+    answers:
+      - 9
+      - nine
+  - question: "A full set of armor requires how many pieces of the same material?"
+    answers:
+      - 24
+      - twentyfour
+      - twenty four
+      - twenty-four
+  - question: "How many different wood types exist (without those of nether trees)?"
+    answers:
+      - 7
+      - seven
+  - question: "What's the main ingredient for scaffolding?"
+    answers:
+      - "Bamboo"
+  - question: "TNT can be crafted with gunpowder and ..."
+    answers:
+      - "Sand"
+  - question: "What's the only craftable music disc?"
+    answers:
+      - "Music Disc 5"
+      - 5
+      - "Five"
+      - Music Disc Five
+      - Music Disc (5)
+      - Music Disc (Five)
+  - question: "A Compass and 8 Echo Shards can be crafted into ..."
+    answers:
+      - "Recovery Compass"
+  - question: "What kind of ingots are required to craft a blast furnace?"
+    answers:
+      - "Iron ingot"
+      - "Iron"
+  - question: "A target block consists of 4 redstone and 1 ..."
+    answers:
+      - "Hay bale"
+      - "hay block"
+      - "Hay"
+  - question: "Coarse Dirt can be crafted with 2 dirt and 2 ..."
+    answers:
+      - "Gravel"
+  - question: "A Respawn Anchor consists of glowstone and ..."
+    answers:
+      - "Crying Obsidian"
+  - question: "A Glistering Melon Slice consists of a Melon Slice and eight ..."
+    answers:
+      - "Gold Nuggets"
+      - "Gold Nugget"
+  - question: "A Brewing Stand requires a blaze rod and ..."
+    answers:
+      - "Cobblestone"
+      - "Cobble stone"
+  - question: "A Lightning Rod can be crafted with ..."
+    answers:
+      - "Copper ingots"
+      - "Copper ingot"
+  - question: "The difference between a Dropper's and a Dispenser's crafting recipe is what item?"
+    answers:
+      - "Bow"
+  - question: "A Fire Charge requires coal, gunpowder, and ..."
+    answers:
+      - "Blaze Powder"
+  - question: "Magma Blocks can be crafted with four ..."
+    answers:
+      - "Magma Cream"
+  - question: "Diorite and Nether Quartz can be crafted into what?"
+    answers:
+      - "Granite"
+  - question: "A Book and Quill can be crafted using a book, a feather and ..."
+    answers:
+      - "Ink Sac"
+      - "Ink Sack"
+      - "inksac"
+      - "inksack"
+  - question: "A Beacon consists of 5 glass, 3 obsidian and 1 ..."
+    answers:
+      - "Nether Star"
+  - question: "The only thing you can craft with exactly 3 Bricks is what?"
+    answers:
+      - "Flower Pot"
+  - question: "A Lead consists of four string and one ..."
+    answers:
+      - "Slimeball"
+      - "Slime ball"
+  - question: "A grindstone consists of two planks, one stone slab, and two ..."
+    answers:
+      - "Sticks"
+      - "stick"
+  - question: "7 Glass, 1 Eye of Ender and 1 Ghast Tear result in what?"
+    answers:
+      - "End Crystal"
+  - question: "Cooked Rabbit + Carrot + Mushroom + Bowl + ... = Rabbit Stew"
+    answers:
+      - "Baked Potato"
+      - "Baked Potatoes"
+      - "Cooked Potato"
+      - "Cooked Potatoes"
+  - question: "The difference between a ... and a Suspicious Stew is a flower."
+    answers:
+      - "Mushroom Stew"
+      - "Mushroom soup"
+  - question: "What flower is required to craft a Suspicious Stew of Night Vision?"
+    answers:
+      - "Poppy"
+  - question: "What flower is required to craft a Suspicious Stew of Poison?"
+    answers:
+      - "Lily of the Valley"
+  - question: "What flower is required to craft a Suspicious Stew of Weakness?"
+    answers:
+      - "Tulips"
+      - "Tulip"
+  - question: "A Suspicious Stew with a Cornflower gives what potion effect?"
+    answers:
+      - "Jump Boost"
+  - question: "A Suspicous Stew with a Blue Orchid gives what potion effect?"
+    answers:
+      - "Saturation"
+  - question: "A Suspicious Stew with an Oxeye Daisy gives what potion effect?"
+    answers:
+      - "Regeneration"
+  - question: "Black Dye can be crafted with an Ink Sac, or ..."
+    answers:
+      - "Wither Rose"
+  - question: "Which potion ingredient is required for the Weakness effect?"
+    answers:
+      - "Fermented Spider Eye"
+  - question: "An Awkward Potion is brewed using ..."
+    answers:
+      - "Nether Warts"
+      - "Nether wart"
+      - "Netherwarts"
+      - "Netherwart"
+  - question: "Splash Potions are brewed using ..."
+    answers:
+      - "Gunpowder"
+      - "gun powder"
+  - question: "A Splash Potion can be turned into a Lingering Potion using ..."
+    answers:
+      - "Dragon's Breath"
+      - "Dragons breath"
+      - "Dragon breath"
+  - question: "A Potion of Swiftness is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Sugar"
+  - question: "A Potion of of Leaping is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Rabbit's Foot"
+      - "Rabbits foot"
+      - "Rabbit foot"
+  - question: "A Potion of Healing is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Glistering Melon Slice"
+      - "Glistering Melon"
+  - question: "A Potion of Strength is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Blaze Powder"
+  - question: "A Potion of Poison is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Spider Eye"
+  - question: "A Potion of Regeneration is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Ghast Tear"
+  - question: "A Potion of Fire Resistance is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Magma Cream"
+  - question: "A Potion of Water Breathing is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Pufferfish"
+      - "Puffer fish"
+  - question: "A Potion of Night Vision is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Golden Carrot"
+  - question: "A Potion of Night Vision can be turned into a Potion of Invisibility by adding what?"
+    answers:
+      - "Fermented Spider Eye"
+  - question: "A Potion of the Turtle Master is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Turtle Shell"
+  - question: "A Potion of Slow Falling is brewed by adding what to an Awkward Potion?"
+    answers:
+      - "Phantom Membrane"
+  - question: "Elytras can be repaired on an anvil using what?"
+    answers:
+      - "Phantom Membranes"
+      - "Phantom Membrane"
+  - question: "You lost your last End Rod and want to craft a new one. What do you need, besides a blaze rod?"
+    answers:
+      - "Popped Chorus Fruit"
+  - question: "Four Popped Chorus Fruit can be crafted into what?"
+    answers:
+      - "Purpur Block"
+  - question: "A barrel can be crafted using 6 wooden planks and 2 ..."
+    answers:
+      - "Wooden Slabs"
+      - "Wood slabs"
+  - question: "A smoker consists of a furnace and four ... ?"
+    answers:
+      - "Logs"
+  - question: "What's needed for a Fletching Table besides wooden planks?"
+    answers:
+      - "Flints"
+      - "Flint"
+  - question: "An ingot of Netherite requires gold ingots and ..."
+    answers:
+      - "Netherite Scraps"
+      - "Netherite Scrap"
+  - question: "A Lodestone can be crafted using 1 Netherite Ingot and 8 ..."
+    answers:
+      - "Chiseled Stone Bricks"
+      - "Chiseled Stonebricks"
+      - "Chiseled Stone Brick"
+      - "Chiseled Stonebrick"
+  - question: "Honeycomb + ... = Candle"
+    answers:
+      - "String"
+      - "Strings"
+  - question: "What do you need to turn Glass into Tinted Glass?"
+    answers:
+      - "Amethyst Shards"
+      - "Amethyst Shard"
+  - question: "Combining a Slimeball and Blaze Powder results in what?"
+    answers:
+      - "Magma Cream"
+  - question: "An Activator Rail requires Iron Ingots, Sticks, and what?"
+    answers:
+      - "Redstone Torch"
+      - "Redstone Torches"
+  - question: "A Daylight Detector can be crafted using 3 Glass, 3 Wooden Slabs, and 3 ..."
+    answers:
+      - "Nether Quartz"
+  - question: "Red Nether Bricks require an equal amount of Nether Bricks and ..."
+    answers:
+      - "Nether Warts"
+      - "Nether wart"
+  - question: "A Sea Lantern consists of 4 Prismarine Shards and 5 ..."
+    answers:
+      - "Prismarine Crystals"
+      - "Prismarine Crystal"
+  - question: "Cobblestone and Diorite can be combined into ..."
+    answers:
+      - "Andesite"
+  - question: "A Purpur Pillar consists of two ..."
+    answers:
+      - "Purpur Slabs"
+      - "Purpur Slab"
+  - question: "A Conduit can be crafted using 8 Nautilus Shells and 1 ..."
+    answers:
+      - "Heart of the Sea"
+      - "Heart of the Seas"
+  - question: "A Conduit can be crafted using 1 Heart of the Sea and 8 ..."
+    answers:
+      - "Nautilus Shells"
+      - "Nautilus Shell"
+  - question: "1 Iron Ingot + 2 ... = 1 Chain"
+    answers:
+      - "Iron Nuggets"
+      - "Iron Nugget"
+  - question: "How many blocks of the same type are required to craft 8 stairs?"
+    answers:
+      - "12"
+      - "twelve"
+  - question: "How many pieces of paper do you need for a level 30 Enchanting Table (including the Bookshelves and the Enchanting Table itself)?"
+    answers:
+      - "138"
+  - question: "How many pieces of leather do you need for a level 30 Enchanting Table (including the Bookshelves and the Enchanting Table itself)"
+    answers:
+      - "46"
+      - "fourty six"
+      - "fourtysix"
+      - "fourty-six"
+  - question: "A Dripstone Block consists of four ..."
+    answers:
+    - "Pointed Dripstones"
+    - "Pointed dripstone"
+  - question: "Diorite can be crafted using Nether Quartz and what?"
+    answers:
+      - "Cobblestone"
+      - "Cobble stone"
