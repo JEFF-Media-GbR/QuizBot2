@@ -5,11 +5,11 @@ import java.util.*;
 public class EqualDistributedList<T> extends ArrayList<T> implements Comparator<T>{
 
     private final Map<Integer,Integer> frequencies = new HashMap<>();
-    private final ShortTermMemoryBuffer<T> buffer;
+    private final ImpairedShortTermMemoryBuffer<T> buffer;
 
     public EqualDistributedList(Collection<T> collection) {
         super(collection);
-        buffer = new ShortTermMemoryBuffer<>(Math.max(size() / 4,1));
+        buffer = new ImpairedShortTermMemoryBuffer<>(Math.max(size() / 4,1));
     }
 
     @SafeVarargs
