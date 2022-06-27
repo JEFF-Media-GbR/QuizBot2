@@ -36,3 +36,51 @@ questions:
     answers:
       - "ConfigurationSerializable"
       - "org.bukkit.configuration.serialization.ConfigurationSerializable"
+  - question: "The \"libraries\" feature in plugin.yml was added in which version?"
+    answers:
+      - "1.16.5"
+  - question: "The PersistentDataContainer was added in which version?"
+    answers:
+      - "1.14.1"
+  - question: "Since what version do Chunks implement PersistentDataHolder?"
+    answers:
+      - "1.16.3"
+  - question: "What interface combines both TabCompleter and CommandExecutor?"
+    answers:
+      - "TabExecutor"
+      - "org.bukkit.command.TabExecutor"
+  - question: "Which class represents a rectangular box?"
+    answers:
+      - "BoundingBox"
+      - "org.bukkit.util.BoundingBox"
+  - question: "How many PersistentDataTypes does the Bukkit API provide?"
+    answers:
+      - "12"
+      - "twelve"
+  - question: "How many methods does the Listener interface declare?"
+    answers:
+      - "None"
+      - "0"
+      - "zero"
+  - question: "Which event is called when a hopper tries to move items from one inventory to another?"
+    answers:
+      - "InventoryMoveItemEvent"
+      - "InventoryMoveItem"
+      - "org.bukkit.event.inventory.InventoryMoveItemEvent"
+  - question: "The implementation of the PluginManager interface is called ..."
+    answers:
+      - "SimplePluginManager"
+      - "org.bukkit.plugin.SimplePluginManager"
+  - question: "LivingEntity#rayTraceBlocks(...) returns an instance of what class?"
+    answers:
+      - "RayTraceResult"
+      - "org.bukkit.util.RayTraceResult"
+  - question: "In plugin.yml, at least the following attributes have to be defined: main, name, and ..."
+    answers:
+      - "version"
+  - question: "Valid values for the \"load\" attribute in plugin.yml are STARTUP and ..."
+    answers:
+      - "POSTWORLD"
+  - question: "The opposite of \"softdepend\" in plugin.yml is called ..."
+    answers:
+      - "loadbefore"
