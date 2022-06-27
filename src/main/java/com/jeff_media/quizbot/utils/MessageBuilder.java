@@ -44,7 +44,7 @@ public class MessageBuilder {
     }
 
     public CompletableFuture<Message> send() {
-        CompletableFuture<Message> future = new CompletableFuture<>();
+        //CompletableFuture<Message> future = new CompletableFuture<>();
         if(embed) {
             EmbedBuilder builder = new EmbedBuilder();
             if(title != null) {
@@ -54,9 +54,9 @@ public class MessageBuilder {
                 builder.setDescription(description);
             }
             if(replyTo != null) {
-                replyTo.replyEmbeds(builder.build()).queue(future::complete, future::completeExceptionally);
+                return replyTo.replyEmbeds(builder.build()).submit();
             } else {
-                channel.sendMessageEmbeds(builder.build()).queue(future::complete,future::completeExceptionally);
+                return channel.sendMessageEmbeds(builder.build()).submit();
             }
         } else {
             String message = "";
@@ -68,11 +68,10 @@ public class MessageBuilder {
                 message = description;
             }
             if(replyTo != null) {
-                replyTo.reply(message).queue(future::complete, future::completeExceptionally);
+                return replyTo.reply(message).submit();
             } else {
-                channel.sendMessage(message).queue(future::complete, future::completeExceptionally);
+                return channel.sendMessage(message).submit();
             }
         }
-        return future;
     }
 }

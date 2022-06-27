@@ -1,8 +1,8 @@
 package com.jeff_media.quizbot.data;
 
 import com.jeff_media.quizbot.QuizBot;
+import com.jeff_media.quizbot.utils.AnswerUtils;
 import com.jeff_media.quizbot.utils.MessageBuilder;
-import com.jeff_media.quizbot.utils.WordUtils;
 import com.jeff_media.quizbot.utils.YamlUtils;
 import com.jeff_media.quizbot.config.Config;
 import lombok.Getter;
@@ -128,7 +128,7 @@ public class Game {
                     try {
                         //channel.sendMessage("Noone? The correct answer would have been: " + currentQuestion.getAnswer().getCorrectAnswerDisplay()).queue();
                         new MessageBuilder(channel)
-                                .description(WordUtils.getYoureAllNoobResponse(currentQuestion.getAnswer().getCorrectAnswerDisplay()))
+                                .description(AnswerUtils.getYoureAllNoobResponse(currentQuestion.getAnswer().getCorrectAnswerDisplay()))
                                 .replyTo(lastQuestionMessage)
                                 .send();
                         questionTimeOverTask = null;
@@ -195,7 +195,7 @@ public class Game {
                 questionTimeOverTask = null;
             }
             new MessageBuilder(channel)
-                    .description(WordUtils.getCorrectResponse())
+                    .description(AnswerUtils.getCorrectResponse())
                     .replyTo(message)
                     .send();
             System.out.println(message.getMember().getEffectiveName() + " correctly answered: " + message.getContentRaw());

@@ -2,7 +2,7 @@ name: Minecraft Crafting Recipes
 authors:
   - mfnalex
 questions:
-  - question: "A spyglass can be crafted with two copper ingots and ..."
+  - question: "A spyglass can be crafted with two copper ingots and one ..."
     answers:
       - "Amethyst Shard"
   - question: "A hay bale consists of how many wheat?"
@@ -84,7 +84,7 @@ questions:
   - question: "A Beacon consists of 5 glass, 3 obsidian and 1 ..."
     answers:
       - "Nether Star"
-  - question: "The only thing you can craft with exactly 3 Bricks is what?"
+  - question: "The only thing you can craft with exactly 3 Bricks (NOT Brick Blocks) is what?"
     answers:
       - "Flower Pot"
   - question: "A Lead consists of four string and one ..."
@@ -285,3 +285,93 @@ questions:
     answers:
       - "Cobblestone"
       - "Cobble stone"
+  - question: "Tripwire Hook + Chest = ..."
+    answers:
+      - "Trapped Chest"
+  - question: "6 Sticks + 1 ... = Armor Stand"
+    answers:
+      - "Smooth Stone Slab"
+  - question: "1 Soul Torch + 8 ... = Soul Lantern"
+    answers:
+      - "Iron Nuggets"
+      - "Iron nugget"
+  - question: "A Soul Torch is crafted using a coal, a stick, and ..."
+    answers:
+      - "Soul Soil or Soul Sand"
+      - "Soul Soil"
+      - "Soul Sand"
+  - question: "How many stacks of Sticks can you craft out of one stack of Logs?"
+    answers:
+      - "8"
+      - "eight"
+  - question: "How many ladders can you craft out of 10 Logs?"
+    answers:
+      - "33"
+      - "thirty three"
+      - "thirty-three"
+      - "thirtythree"
+  - question: "How many Glass Panes can you craft out of one stack of Glass?"
+    answers:
+      - "160"
+  - question: "A Loom can be crafted using 2 Wooden Planks and 2 ..."
+    answers:
+      - "Strings"
+      - "String"
+  - question: "A Redstone Comparator can be crafted using 3 Stone, 3 Redstone Torches, and 1 ..."
+    answers:
+      - "Nether Quartz"
+  - question: "How many Beetroots do you need for one Beetroot Soup?"
+    answers:
+      - "6"
+      - "six"
+  - question: "3 Sticks + 2 Strings + 1 Iron Ingot + 1 Tripwire Hook = ..."
+    answers:
+      - "Crossbow"
+  - question: "What items can be crafted into sticks, besides Wooden Planks?"
+    answers:
+      - "Bamboo"
+  - question: "Leather can be crafted using 4 ..."
+    answers:
+      - "Rabbit Hide"
+  - question: "How many Iron Nuggets do you need to craft one Iron Block?"
+    answers:
+      - "81"
+      - "eighty one"
+      - "eighty-one"
+      - "eightyone"
+  - question: "How many Gold Nuggets can you craft out of one stack of Gold Blocks?"
+    answers:
+      - "5184"
+  - question: "What can you craft using only a Honey Bottle?"
+    answers:
+      - "Sugar"
+  - question: "A Composter can be crafted using 7 ..."
+    answers:
+      - "Wooden Slabs"
+      - "Wooden Slab"
+      - "Wood slabs"
+      - "Wood slab"
+  - question: "It used to be possible to craft Chainmail Armor out of what?"
+    answers:
+      - "Fire"
+  - question: "9 Ice Blocks = 1 ..."
+    answers:
+      - "Packed Ice"
+  - question: "Snow Blocks can be crafted using ..."
+    answers:
+      - "Snowballs"
+      - "Snowball"
+  - question: "Mossy Stone Bricks can be crafted by combining either Stone Bricks and Moss Blocks, or Stone Bricks and ..."
+    answers:
+      - "Vines"
+      - "Vine"
+  - question: "How many Ice Blocks do you need to craft one Blue Ice Block?"
+    answers:
+      - "81"
+      - "eighty one"
+      - "eighty-one"
+      - "eightyone"
+  - question: "4 Packed Mud can be crafted into 4 ..."
+    answers:
+      - "Mud Bricks"
+      - "Mud Brick"
