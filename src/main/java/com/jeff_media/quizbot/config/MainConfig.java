@@ -7,19 +7,19 @@ public class MainConfig extends Config {
         super("config.yml");
     }
 
-    public String getBotToken() {
+    public String botToken() {
         return (String) map.get("bot-token");
     }
 
-    public String getPrefix() {
+    public String prefix() {
         return (String) map.get("prefix");
     }
 
-    public int getTimePerQuestion() {
+    public int timePerQuestion() {
         return (int) map.get("time-per-question");
     }
 
-    public int getTypingDurationPerQuestion() {
+    public int typingDurationPerQuestion() {
         return (int) map.get("typing-duration-per-question");
     }
 
@@ -27,11 +27,15 @@ public class MainConfig extends Config {
         return (boolean) map.get("everyone-can-stop");
     }
 
-    public int getWinThreshold() {
+    public int winThreshold() {
         return (int) map.get("win-threshold");
     }
 
     public boolean distributeQuestionsEvenly() {
         return (boolean) map.get("distribute-questions-evenly");
+    }
+
+    public int stopAfterQuestionsWithoutAnswers() {
+        return (int) map.get("stop-after-questions-without-answers");
     }
 }

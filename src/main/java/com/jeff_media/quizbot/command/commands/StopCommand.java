@@ -37,12 +37,24 @@ public class StopCommand implements CommandExecutor {
             }
         }
 
-        return CommandResult.WRONG_USAGE;
+        game.endGameAndShowResults();
+
+        return CommandResult.OKAY;
+    }
+
+    @Override
+    public String name() {
+        return "stop";
+    }
+
+    @Override
+    public String description() {
+        return "Stops the current quiz.";
     }
 
     @Override
     public String usage() {
-        return null;
+        return "";
     }
 }
 

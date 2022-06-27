@@ -6,8 +6,12 @@ import net.dv8tion.jda.api.entities.TextChannel;
 
 public interface CommandExecutor {
 
-    CommandResult execute(Message message, String command, String[] args);
+    String name();
+
+    String description();
 
     String usage();
+
+    CommandResult execute(Message message, String command, String[] args);
 
 }

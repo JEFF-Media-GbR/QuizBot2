@@ -3,6 +3,7 @@ package com.jeff_media.quizbot.command.commands;
 import com.jeff_media.quizbot.QuizBot;
 import com.jeff_media.quizbot.command.CommandExecutor;
 import com.jeff_media.quizbot.command.CommandResult;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 
 public class HelpCommand implements CommandExecutor {
@@ -13,17 +14,31 @@ public class HelpCommand implements CommandExecutor {
         this.bot = bot;
     }
 
+    public String name() {
+        return "help";
+    }
+
     @Override
     public CommandResult execute(Message message, String command, String[] args) {
-        message.reply("**Available commands:**\n\n" +
-                "**" + bot.getCommandName("help") + "** - Shows this message.\n" +
-                "**" + bot.getCommandName("list") + "** - Lists available categories.\n" +
-                "**" + bot.getCommandName("start <category>") + "** - Starts a quiz.\n").queue();
+        EmbedBuilder builder = new EmbedBuilder();
+        String prefix = bot.getConfig().prefix();
+        for(CommandExecutor executor : bot.getCommandMap().values()) {
+            String name = executor.name();
+            String usage = executor.usage();
+            String fullCommand = prefix + " " + name + (usage.isEmpty() ? "" : " " + usage);
+            builder.addField(fullCommand, executor.description(), false);
+        }
+        message.replyEmbeds(builder.build()).queue();
         return CommandResult.OKAY;
     }
 
     @Override
     public String usage() {
-        return null;
+        return "";
+    }
+
+    @Override
+    public String description() {
+        return "Shows this help message.";
     }
 }

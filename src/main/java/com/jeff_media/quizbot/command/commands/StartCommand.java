@@ -48,7 +48,17 @@ public class StartCommand implements CommandExecutor {
     }
 
     @Override
+    public String name() {
+        return "start";
+    }
+
+    @Override
+    public String description() {
+        return "Starts a new quiz.";
+    }
+
+    @Override
     public String usage() {
-        return "start <category>";
+        return "<quiz file>";
     }
 }

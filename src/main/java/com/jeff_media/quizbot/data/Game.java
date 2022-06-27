@@ -31,9 +31,11 @@ public class Game {
     @Getter private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
     @Getter private final Map<Question, Member> previousQuestions = new HashMap<>();
     @Getter private final Map<Member,GameStat> stats = new HashMap<>();
+    @Getter private final Set<Member> participants = new HashSet<>();
 
     @Getter private CompletableFuture<Message> lastQuestionMessage;
-    @Getter private ScheduledFuture<?> questionTimeOverTask;
+    @Getter private ScheduledFuture<?> taskQuestionTimeOver;
+    @Getter private ScheduledFuture<?> taskSendNextQuestion;
     @Getter private Question currentQuestion;
 
     public Game(QuizBot bot, String name, List<String> authors, List<Question> questions, TextChannel channel, Member starter) {
@@ -117,21 +119,21 @@ public class Game {
         if(questions.size() > 0 && !isWinThresholdReached()) {
             System.out.println("There are " + questions.size() + " questions left. Sending the next one in 5 seconds");
             channel.sendTyping().queue(success -> {channel.sendTyping().queue();});
-            executor.schedule(() -> {
+            taskSendNextQuestion = executor.schedule(() -> {
                 this.currentQuestion = questions.get(0);
                 QuestionDistributionComparator.raiseFrequency(currentQuestion);
                 System.out.println("Sending question " + currentQuestion.getQuestion());
                 questions.remove(0);
                 broadcastQuestion();
 
-                questionTimeOverTask = executor.schedule(() -> {
+                taskQuestionTimeOver = executor.schedule(() -> {
                     try {
                         //channel.sendMessage("Noone? The correct answer would have been: " + currentQuestion.getAnswer().getCorrectAnswerDisplay()).queue();
                         new MessageBuilder(channel)
                                 .description(AnswerUtils.getYoureAllNoobResponse(currentQuestion.getAnswer().getCorrectAnswerDisplay()))
                                 .replyTo(lastQuestionMessage)
                                 .send();
-                        questionTimeOverTask = null;
+                        taskQuestionTimeOver = null;
                         previousQuestions.put(currentQuestion, null);
                         currentQuestion = null;
                         System.out.println("Noone had the correct answer.");
@@ -139,28 +141,39 @@ public class Game {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }, bot.getConfig().getTimePerQuestion(), TimeUnit.SECONDS);
+                }, bot.getConfig().timePerQuestion(), TimeUnit.SECONDS);
 
-            }, bot.getConfig().getTypingDurationPerQuestion(), TimeUnit.SECONDS);
+            }, bot.getConfig().typingDurationPerQuestion(), TimeUnit.SECONDS);
 
         } else {
             //System.out.println("No questions left. The game is finished");
-            gameFinished();
+            endGameAndShowResults();
         }
     }
 
     private boolean isWinThresholdReached() {
-        int threshold = bot.getConfig().getWinThreshold();
+        int threshold = bot.getConfig().winThreshold();
         if(threshold <= 0) return false;
         return stats.values().stream().anyMatch(stat -> stat.getCorrectAnswers() >= threshold);
     }
 
-    private void gameFinished() {
+    public void endGameAndShowResults() {
+        String header = "**Quiz:** " + name + "\n"
+                + "**Participants:** " + participants.size() + "\n"
+                + "\n";
         bot.getRunningGames().remove(channel);
+        if(taskQuestionTimeOver != null) {
+            taskQuestionTimeOver.cancel(false);
+            taskQuestionTimeOver = null;
+        }
+        if(taskSendNextQuestion != null) {
+            taskSendNextQuestion.cancel(false);
+            taskSendNextQuestion = null;
+        }
         List<GameStat> winners = stats.values().stream().sorted().limit(3).toList();
         if(winners.size() == 0) {
             new MessageBuilder(channel)
-                    .title("Quiz ended").description("No one answered any question correctly lol.")
+                    .title("Quiz Results").description(header + "No one answered any question correctly :smiling_face_with_tear:")
                     .embed(true)
                     .send();
         } else {
@@ -171,7 +184,7 @@ public class Game {
                 return "**#" + place.getAndIncrement() + "** " + stat.getMember().getAsMention() + " (" + stat.getCorrectAnswers() + " correct " + answerWord + ")";
             }).collect(Collectors.joining("\n"));
             new MessageBuilder(channel)
-                    .title("Quiz ended").description(leaderBoard)
+                    .title("Quiz Results").description(header + leaderBoard)
                     .embed(true)
                     .send();
         }
@@ -188,11 +201,12 @@ public class Game {
 
     public void handleMessage(Message message) {
         if(currentQuestion == null) return;
+        addParticipant(message.getMember());
         if(currentQuestion.isCorrectAnswer(message)) {
             stats.computeIfAbsent(message.getMember(), GameStat::new).registerCorrectAnswer();
-            if(questionTimeOverTask != null) {
-                questionTimeOverTask.cancel(true);
-                questionTimeOverTask = null;
+            if(taskQuestionTimeOver != null) {
+                taskQuestionTimeOver.cancel(true);
+                taskQuestionTimeOver = null;
             }
             new MessageBuilder(channel)
                     .description(AnswerUtils.getCorrectResponse())
@@ -205,5 +219,9 @@ public class Game {
         } else {
             System.out.println(message.getMember().getEffectiveName() + " wrongly answered: " + message.getContentRaw());
         }
+    }
+
+    private void addParticipant(Member member) {
+        participants.add(member);
     }
 }

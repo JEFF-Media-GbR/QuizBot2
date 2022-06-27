@@ -1,8 +1,6 @@
 package com.jeff_media.quizbot;
 
-import com.jeff_media.quizbot.config.MainConfig;
 import com.jeff_media.quizbot.data.Game;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -18,7 +16,7 @@ public class MessageListener extends ListenerAdapter {
 
     public MessageListener(QuizBot bot) {
         this.bot = bot;
-        this.prefix = bot.getConfig().getPrefix();
+        this.prefix = bot.getConfig().prefix();
     }
 
     @Override
