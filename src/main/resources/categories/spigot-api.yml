@@ -19,3 +19,20 @@ questions:
     answers:
       - "8"
       - "1.8"
+  - question: "Classes belonging to the vanilla server code are commonly referred to as what?"
+    answers:
+      - "NMS"
+  - question: "Many CraftBukkit classes are wrappers for the underlying NMS classes. What's the method to get the NMS instance of the wrapped object?"
+    answers:
+      - "getHandle"
+      - "getHandle()"
+  - question: "To get a String from your config.yml, you can use getConfig().getString(...). In what class is the getString method declared?"
+    answers:
+      - "ConfigurationSection"
+      - "org.bukkit.configuration.ConfigurationSection"
+      - "MemorySection"
+      - "org.bukkit.configuration.MemorySection"
+  - question: "The Bukkit API provides an interface for serializable objects. What's the name of the interface?"
+    answers:
+      - "ConfigurationSerializable"
+      - "org.bukkit.configuration.serialization.ConfigurationSerializable"
