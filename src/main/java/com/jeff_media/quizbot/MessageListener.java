@@ -1,6 +1,7 @@
 package com.jeff_media.quizbot;
 
 import com.jeff_media.quizbot.data.Game;
+import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -33,6 +34,7 @@ public class MessageListener extends ListenerAdapter {
     }
 
     private void handleMessage(Message message) {
+        if(message.getChannelType() != ChannelType.TEXT) return;
         TextChannel channel = message.getTextChannel();
         Game game = bot.getRunningGames().get(channel);
         if(game == null) {

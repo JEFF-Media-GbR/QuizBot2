@@ -83,3 +83,19 @@ questions:
   - question: "The opposite of \"softdepend\" in plugin.yml is called ..."
     answers:
       - "loadbefore"
+  - question: "The EnderDragon interface extends an interface that no other class implements/extends. What's the name of that interface?"
+    answers:
+      - "ComplexLivingEntity"
+      - "org.bukkit.entity.ComplexLivingEntity"
+  - question: "What interface declares the method \"getAbsorptionAmount()\"?"
+    answers:
+      - "Damageable"
+      - "org.bukkit.entity.Damageable"
+  - question: "What's the encouraged alternative to the PlayerChatEvent?"
+    answers:
+      - "AsyncPlayerChatEvent"
+      - "org.bukkit.event.player.AsyncPlayerChatEvent"
+  - question: "Which enum class defines the fields \"Highest\", \"High\", \"Normal\", \"Low\" and \"Lowest\"?"
+    answers:
+      - "ServicePriority"
+      - "org.bukkit.plugin.ServicePriority"
