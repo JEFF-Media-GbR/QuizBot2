@@ -21,6 +21,7 @@
                 <version>3.3.0</version>
                 <configuration>
                     <minimizeJar>true</minimizeJar>
+                    <createDependencyReducedPom>true</createDependencyReducedPom>
                 </configuration>
                 <executions>
                     <execution>

@@ -24,7 +24,7 @@ public class Question extends MapSerializable {
 
     public Question(Map<String,Object> map) {
         this.question = YamlUtils.getString(map, "question");
-        this.answerList = new AnswerList(YamlUtils.getStringList(map, "answers"));
+        this.answerList = new AnswerList(YamlUtils.getList(map, "answers"));
         this.extraTime = (int) map.getOrDefault("extra-time",0);
     }
 

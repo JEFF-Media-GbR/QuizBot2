@@ -5,7 +5,7 @@ import java.util.*;
 public class EqualDistributedList<T> extends ArrayList<T> implements Comparator<T>{
 
     private final Map<Integer,Integer> frequencies = new HashMap<>();
-    private final ImpairedShortTermMemoryBuffer<T> buffer;
+    private final IMemoryBuffer<T> buffer;
 
     public EqualDistributedList(Collection<T> collection) {
         super(collection);

@@ -8,12 +8,26 @@ public class Answer {
 
     public static Answer deserialize(Object answer) {
         if(answer instanceof Map) {
-            return new Answer((Map<String,Object>) answer);
-        } else {
-            return new Answer(String.valueOf(answer));
-        }
+            @SuppressWarnings("unchecked")
+            Answer toReturn = deserialize((Map<String,Object>)answer);
+            return toReturn;
+        } else /*if(answer instanceof String string)*/{
+            String string = String.valueOf(answer);
+            if(Number.isNumber(string)) {
+                return new NumericAnswer(string);
+            }
+            return new Answer(string);
+        }/* else {
+            throw new IllegalArgumentException("Could not parse answer: " + answer);
+        }*/
     }
-    private Answer(String answer) {
+
+    public static Answer deserialize(Map<String,Object> map) {
+        Object answer = map.get("answer");
+        return deserialize(answer);
+    }
+
+    Answer(String answer) {
         this.answer = answer;
     }
 

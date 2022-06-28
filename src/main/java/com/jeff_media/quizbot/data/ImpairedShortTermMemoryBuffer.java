@@ -3,7 +3,7 @@ package com.jeff_media.quizbot.data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImpairedShortTermMemoryBuffer<T> {
+public class ImpairedShortTermMemoryBuffer<T> implements IMemoryBuffer<T> {
 
     private final List<T> buffer = new ArrayList<>();
     private final int size;

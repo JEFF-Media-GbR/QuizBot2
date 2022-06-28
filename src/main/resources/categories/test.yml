@@ -2,10 +2,9 @@ name: Test
 authors: mfnalex
 win-threshold: 3
 questions:
-  - question: "Java 8 is also known as?"
+  - question: "(String) What's 30 + 4?"
     answers:
-      - "1.8"
-  - question: "Does this question have one minute of extra time?"
-    extra-time: 60
+      - 34
+  - question: "(Map) What's 30 + 5?"
     answers:
-      - "yes"
+      - answer: 35

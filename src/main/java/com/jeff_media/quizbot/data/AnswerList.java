@@ -13,8 +13,10 @@ public class AnswerList {
     public AnswerList(Object object) {
         this.correctAnswers = new ArrayList<>();
         if(object instanceof List list) {
+            System.out.println("Parsing answers from list");
             list.forEach(answer -> this.correctAnswers.add(Answer.deserialize(answer)));
         } else {
+            System.out.println("Parsing answer directly");
             correctAnswers.add(Answer.deserialize(object));
         }
     }

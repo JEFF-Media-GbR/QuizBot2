@@ -11,7 +11,7 @@ time-per-question: 15
 # Time in seconds the bot needs to send a new question
 typing-duration-per-question: 3
 
-# Number of questions without any answers before the quiz automatically stops
+# DefaultNumber of questions without any answers before the quiz automatically stops
 # Answers do not have to be correct to continue the quiz
 stop-after-questions-without-answers: 10
 

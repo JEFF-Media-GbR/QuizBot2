@@ -1,4 +1,4 @@
-name: Spigot API
+name: Spigot API (WIP)
 authors:
   - mfnalex
 questions:
@@ -19,7 +19,7 @@ questions:
     answers:
       - "Java 8"
       - "Java 1.8"
-      - "8"
+      - 8
       - "1.8"
   - question: "Classes belonging to the vanilla server code are commonly referred to as what?"
     answers:
@@ -57,13 +57,10 @@ questions:
       - "org.bukkit.util.BoundingBox"
   - question: "How many PersistentDataTypes does the Bukkit API provide?"
     answers:
-      - "12"
-      - "twelve"
+      - 12
   - question: "How many methods does the Listener interface declare?"
     answers:
-      - "none"
-      - "0"
-      - "zero"
+      - 0
   - question: "Which event is called when a hopper tries to move items from one inventory to another?"
     answers:
       - "InventoryMoveItemEvent"

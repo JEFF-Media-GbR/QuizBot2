@@ -14,7 +14,7 @@ public abstract class MapSerializable {
     public abstract Map<String,Object> serialize();
 
     private static <T extends MapSerializable> Constructor<T> getConstructor(Class<T> clazz) {
-        //noinspection unchecked
+        @SuppressWarnings("unchecked")
         Constructor<T> constructor = (Constructor<T>) CONSTRUCTORS.get(clazz);
         if (constructor == null) {
             try {

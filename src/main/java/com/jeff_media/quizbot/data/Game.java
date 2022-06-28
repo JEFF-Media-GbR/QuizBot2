@@ -117,9 +117,6 @@ public class Game {
     }
 
     public void nextQuestion() {
-        System.out.println("nextQuestion called");
-        //this.currentQuestion = null;
-
         if(questions.size() > 0 && !isWinThresholdReached()) {
             System.out.println("There are " + questions.size() + " questions left. Sending the next one in 5 seconds");
             channel.sendTyping().queue(success -> {channel.sendTyping().queue();});

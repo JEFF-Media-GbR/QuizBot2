@@ -22,6 +22,17 @@ public final class YamlUtils {
         return strings;
     }
 
+    public static List<Object> getList(Map<String,Object> map, String key) {
+        Object value = map.get(key);
+        List<Object> strings = new ArrayList<>();
+        if(value instanceof List list) {
+            strings.addAll(((List<?>) list));
+        } else {
+            strings.add(value);
+        }
+        return strings;
+    }
+
     public static String getString(Map<String,Object> map, String key) {
         Object value = map.get(key);
         if(value instanceof List list) {
