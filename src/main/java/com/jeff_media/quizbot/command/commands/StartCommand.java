@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
 
 public class StartCommand implements CommandExecutor {
 
@@ -16,35 +17,6 @@ public class StartCommand implements CommandExecutor {
 
     public StartCommand(QuizBot bot) {
         this.bot = bot;
-    }
-
-    @Override
-    public CommandResult execute(Message message, String command, String[] args) {
-        if(args.length == 0) {
-            return CommandResult.WRONG_USAGE;
-        }
-
-        TextChannel channel = message.getTextChannel();
-        Member member = message.getMember();
-        String quizName = args[0].toLowerCase(Locale.ROOT);
-
-        if(bot.getRunningGames().get(channel) != null) {
-            message.reply("There's already a quiz running in this channel.").queue();
-            return CommandResult.UNKNOWN_ERROR;
-        }
-
-        Game game;
-        try {
-            game = Game.fromCategory(bot,quizName,channel,member);
-        } catch (Game.CategoryNotFoundException e) {
-            message.reply("Unknown category \"" + quizName + "\". Enter \"" + bot.getCommandName("list") + "\" for a list of available categories.").queue();
-            return CommandResult.UNKNOWN_ERROR;
-        }
-
-        bot.getRunningGames().put(channel, game);
-        game.start();
-
-        return CommandResult.OKAY;
     }
 
     @Override
@@ -60,5 +32,34 @@ public class StartCommand implements CommandExecutor {
     @Override
     public String usage() {
         return "<quiz file>";
+    }
+
+    @Override
+    public CommandResult execute(Message message, String command, String[] args) {
+        if (args.length == 0) {
+            return CommandResult.WRONG_USAGE;
+        }
+
+        TextChannel channel = message.getTextChannel();
+        Member member = message.getMember();
+        String quizName = args[0].toLowerCase(Locale.ROOT);
+
+        if (bot.getRunningGames().get(channel) != null) {
+            message.reply("There's already a quiz running in this channel.").queue();
+            return CommandResult.UNKNOWN_ERROR;
+        }
+
+        CompletableFuture<Game> future = Game.fromCategory(bot, quizName, channel, member);
+        future.whenComplete((game, throwable) -> {
+            if (throwable != null) {
+                message.reply("Unknown category \"" + quizName + "\". Enter \"" + bot.getCommandName("list") + "\" for a list of available categories.").queue();
+            } else {
+                bot.getRunningGames().put(channel, game);
+                game.start();
+            }
+        });
+
+
+        return CommandResult.OKAY;
     }
 }

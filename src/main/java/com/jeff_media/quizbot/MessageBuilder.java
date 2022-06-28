@@ -1,4 +1,4 @@
-package com.jeff_media.quizbot.utils;
+package com.jeff_media.quizbot;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
@@ -13,6 +13,7 @@ public class MessageBuilder {
     private String description;
     private Message replyTo;
     private boolean embed;
+    private boolean thenType;
 
     public MessageBuilder title(String title) {
         this.title = title;
@@ -21,6 +22,11 @@ public class MessageBuilder {
 
     public MessageBuilder description(String description) {
         this.description = description;
+        return this;
+    }
+
+    public MessageBuilder thenType() {
+        this.thenType = true;
         return this;
     }
 
@@ -34,8 +40,8 @@ public class MessageBuilder {
         return this;
     }
 
-    public MessageBuilder embed(boolean embed) {
-        this.embed = embed;
+    public MessageBuilder embed() {
+        this.embed = true;
         return this;
     }
 
@@ -44,7 +50,7 @@ public class MessageBuilder {
     }
 
     public CompletableFuture<Message> send() {
-        //CompletableFuture<Message> future = new CompletableFuture<>();
+        CompletableFuture<Message> future;
         if(embed) {
             EmbedBuilder builder = new EmbedBuilder();
             if(title != null) {
@@ -54,24 +60,28 @@ public class MessageBuilder {
                 builder.setDescription(description);
             }
             if(replyTo != null) {
-                return replyTo.replyEmbeds(builder.build()).submit();
+                future = replyTo.replyEmbeds(builder.build()).submit();
             } else {
-                return channel.sendMessageEmbeds(builder.build()).submit();
+                future = channel.sendMessageEmbeds(builder.build()).submit();
             }
         } else {
             String message = "";
             if(title != null && description != null) {
-                message = "**" + title + "**\n" + description;
+                message = title + "\n" + description;
             } else if(title != null) {
-                message = "**" + title + "**";
+                message = title;
             } else {
                 message = description;
             }
             if(replyTo != null) {
-                return replyTo.reply(message).submit();
+                future = replyTo.reply(message).submit();
             } else {
-                return channel.sendMessage(message).submit();
+                future = channel.sendMessage(message).submit();
             }
         }
+        if(thenType) {
+            future.thenAccept(message -> message.getTextChannel().sendTyping().queue());
+        }
+        return future;
     }
 }

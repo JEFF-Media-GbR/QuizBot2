@@ -4,7 +4,7 @@ import com.jeff_media.quizbot.QuizBot;
 import com.jeff_media.quizbot.command.CommandExecutor;
 import com.jeff_media.quizbot.command.CommandResult;
 import com.jeff_media.quizbot.data.Game;
-import com.jeff_media.quizbot.utils.MessageBuilder;
+import com.jeff_media.quizbot.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 

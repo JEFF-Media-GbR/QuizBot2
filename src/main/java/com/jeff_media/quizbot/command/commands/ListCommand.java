@@ -3,7 +3,7 @@ package com.jeff_media.quizbot.command.commands;
 import com.jeff_media.quizbot.QuizBot;
 import com.jeff_media.quizbot.command.CommandExecutor;
 import com.jeff_media.quizbot.command.CommandResult;
-import com.jeff_media.quizbot.utils.MessageBuilder;
+import com.jeff_media.quizbot.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
 
 public class ListCommand implements CommandExecutor {
@@ -24,7 +24,7 @@ public class ListCommand implements CommandExecutor {
 
     @Override
     public CommandResult execute(Message message, String command, String[] args) {
-        new MessageBuilder(message.getTextChannel()).replyTo(message).title("Available quizzes").description(String.join(", ",bot.getCategories())).send();
+        new MessageBuilder(message.getTextChannel()).replyTo(message).title("Available quizzes").description(String.join(", ",bot.getAvailableQuizzes())).send();
         return CommandResult.OKAY;
     }
 

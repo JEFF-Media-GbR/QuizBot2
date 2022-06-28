@@ -1,13 +1,27 @@
 package com.jeff_media.quizbot.config;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class MainConfig extends Config {
+
+    private final File botTokenFile = new File(System.getProperty("user.home") + "/.quizbot/bot.token");
+    private String botTokenFromUserHome;
+
     public MainConfig() throws FileNotFoundException {
         super("config.yml");
+        if(botTokenFile.exists()) {
+            try (Scanner scanner = new Scanner(botTokenFile)) {
+                botTokenFromUserHome = scanner.nextLine();
+            }
+        }
     }
 
     public String botToken() {
+        if(botTokenFromUserHome != null) {
+            return botTokenFromUserHome;
+        }
         return (String) map.getOrDefault("bot-token","YOUR_BOT_TOKEN");
     }
 

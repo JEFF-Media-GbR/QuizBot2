@@ -1,23 +1,39 @@
 package com.jeff_media.quizbot.data;
 
-import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class Answer {
 
-    @Getter private final String correctAnswerDisplay;
-    @Getter private final List<String> correctAnswers;
+    private final String answer;
 
-    public Answer(Object answers) {
-        this.correctAnswers = new ArrayList<>();
-        if(answers instanceof List list) {
-            list.forEach(answer -> this.correctAnswers.add(String.valueOf(answer)));
+    public static Answer deserialize(Object answer) {
+        if(answer instanceof Map) {
+            return new Answer((Map<String,Object>) answer);
         } else {
-            correctAnswers.add(String.valueOf(answers));
+            return new Answer(String.valueOf(answer));
         }
-        this.correctAnswerDisplay = correctAnswers.get(0);
+    }
+    private Answer(String answer) {
+        this.answer = answer;
     }
 
+    private Answer(Map<String, Object> object) {
+        this.answer = String.valueOf(object.get("answer"));
+    }
+
+    @Override
+    public String toString() {
+        return "Answer{" + "answer='" + answer + '\'' + '}';
+    }
+
+    public boolean isCorrect(String input) {
+        if(input.length() > answer.length() + 30) {
+            return false;
+        }
+        return (" " + input + " ").toLowerCase().contains((" " + answer + " ").toLowerCase());
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
 }

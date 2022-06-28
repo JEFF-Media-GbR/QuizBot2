@@ -1,4 +1,5 @@
 # Your bot token
+# You can also create a file at ~/.quizbot/bot.token that only contains your bot token
 bot-token: "YOUR_BOT_TOKEN"
 
 # Main command name

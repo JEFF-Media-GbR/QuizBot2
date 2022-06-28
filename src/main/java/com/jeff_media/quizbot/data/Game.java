@@ -2,13 +2,14 @@ package com.jeff_media.quizbot.data;
 
 import com.jeff_media.quizbot.QuizBot;
 import com.jeff_media.quizbot.utils.AnswerUtils;
-import com.jeff_media.quizbot.utils.MessageBuilder;
+import com.jeff_media.quizbot.MessageBuilder;
 import com.jeff_media.quizbot.utils.YamlUtils;
 import com.jeff_media.quizbot.config.Config;
 import lombok.Getter;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -39,7 +40,7 @@ public class Game {
     @Getter private int questionsWithoutAnyAnswers = 0;
     @Getter private Question currentQuestion;
 
-    public Game(QuizBot bot, String name, List<String> authors, List<Question> questions, TextChannel channel, Member starter) {
+    public Game(@NotNull QuizBot bot, String name, List<String> authors, List<Question> questions, TextChannel channel, Member starter) {
         this.bot = bot;
         this.name = name;
         this.authors = authors;
@@ -59,20 +60,22 @@ public class Game {
         nextQuestion();
     }
 
-    public static Game fromCategory(QuizBot bot, String fileName, TextChannel channel, Member starter) throws CategoryNotFoundException {
-        try {
-            return fromNativeCategory(bot, fileName, channel, starter);
-        } catch (FileNotFoundException ignored) {
+    public static CompletableFuture<Game> fromCategory(QuizBot bot, String fileName, TextChannel channel, Member starter) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return fromNativeCategory(bot, fileName, channel, starter);
+            } catch (FileNotFoundException ignored) {
 
-        }
+            }
 
-        try {
-            return fromRedCategory(bot, fileName, channel, starter);
-        } catch (FileNotFoundException ignored) {
+            try {
+                return fromRedCategory(bot, fileName, channel, starter);
+            } catch (FileNotFoundException ignored) {
 
-        }
+            }
 
-        throw new CategoryNotFoundException();
+            throw new CompletionException(new CategoryNotFoundException());
+        });
     }
 
     /**
@@ -104,7 +107,7 @@ public class Game {
             List<Question> questions = new ArrayList<>();
             for(Map.Entry<String, Object> entry : config.entrySet()) {
                 if(entry.getKey().equalsIgnoreCase("AUTHOR")) continue;
-                questions.add(new Question(entry.getKey(), new Answer(entry.getValue())));
+                questions.add(new Question(entry.getKey(), new AnswerList(entry.getValue())));
             }
             return new Game(bot,name,authors,questions,channel,starter);
     }
@@ -123,7 +126,7 @@ public class Game {
             taskSendNextQuestion = executor.schedule(() -> {
                 this.currentQuestion = questions.get(0);
                 QuestionDistributionComparator.raiseFrequency(currentQuestion);
-                System.out.println("Sending question " + currentQuestion.getQuestion());
+                System.out.println("Sending question " + currentQuestion.toString());
                 questions.remove(0);
                 broadcastQuestion();
 
@@ -131,8 +134,9 @@ public class Game {
                     try {
                         questionsWithoutAnyAnswers++;
                         new MessageBuilder(channel)
-                                .description(AnswerUtils.getYoureAllNoobResponse(currentQuestion.getAnswer().getCorrectAnswerDisplay()))
+                                .description(AnswerUtils.getYoureAllNoobResponse(currentQuestion.getAnswerList().getCorrectAnswerDisplay()))
                                 .replyTo(lastQuestionMessage)
+                                .thenType()
                                 .send();
                         taskQuestionTimeOver = null;
                         previousQuestions.put(currentQuestion, null);
@@ -146,7 +150,7 @@ public class Game {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }, bot.getConfig().timePerQuestion(), TimeUnit.SECONDS);
+                }, bot.getConfig().timePerQuestion() + currentQuestion.getExtraTime(), TimeUnit.SECONDS);
 
             }, bot.getConfig().typingDurationPerQuestion(), TimeUnit.SECONDS);
 
@@ -187,7 +191,7 @@ public class Game {
         if(winners.size() == 0) {
             new MessageBuilder(channel)
                     .title("Quiz Results").description(header + "No one answered any question correctly :smiling_face_with_tear:")
-                    .embed(true)
+                    .embed()
                     .send();
         } else {
             AtomicInteger place = new AtomicInteger(1);
@@ -198,16 +202,19 @@ public class Game {
             }).collect(Collectors.joining("\n"));
             new MessageBuilder(channel)
                     .title("Quiz Results").description(header + leaderBoard)
-                    .embed(true)
+                    .embed()
                     .send();
         }
     }
 
     private void broadcastQuestion() {
         int questionNumber = previousQuestions.size() + 1;
-        //channel.sendMessage("**Question #" + questionNumber + "**\n" + currentQuestion.getQuestion()).queue(message -> {lastQuestionMessage = message;}, error -> {lastQuestionMessage = null;});
+        String extraInformation = currentQuestion.getExtraInformation();
+        if(!extraInformation.isEmpty()) {
+            extraInformation = " (" + extraInformation + ")";
+        }
         lastQuestionMessage = new MessageBuilder(channel)
-                .title("\nQuestion #" + questionNumber)
+                .title("**Question #" + questionNumber + "**" + extraInformation + "\n")
                 .description(currentQuestion.getQuestion())
                 .send();
     }
@@ -216,7 +223,7 @@ public class Game {
         if(currentQuestion == null) return;
         questionsWithoutAnyAnswers = 0;
         addParticipant(message.getMember());
-        if(currentQuestion.isCorrectAnswer(message)) {
+        if(currentQuestion.getAnswerList().isCorrect(message.getContentRaw())) {
             stats.computeIfAbsent(message.getMember(), GameStat::new).registerCorrectAnswer();
             if(taskQuestionTimeOver != null) {
                 taskQuestionTimeOver.cancel(true);
@@ -243,5 +250,13 @@ public class Game {
         int threshold = bot.getConfig().stopAfterQuestionsWithoutAnswers();
         if(threshold <= 0) return false;
         return questionsWithoutAnyAnswers >= threshold;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        for(int i = 0; i < 20; i++) {
+            System.out.println("FINALIZED");
+        }
     }
 }

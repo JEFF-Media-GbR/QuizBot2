@@ -18,8 +18,8 @@ questions:
   - question: "The Bukkit API (as of version 1.19) requires at least which version of Java?"
     answers:
       - "Java 8"
-      - "8"
       - "Java 1.8"
+      - "8"
       - "1.8"
   - question: "Classes belonging to the vanilla server code are commonly referred to as what?"
     answers:
